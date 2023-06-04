@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="homeUiState"
+            type="com.codechallenge.nearshoretest.ui.home.HomeFragmentUiState" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.HomeFragment"
+        android:background="@color/app_bg">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/charRecView"
+            android:visibility="@{homeUiState.listVisibility}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foregroundTint="@color/card_text_color"
+            android:visibility="@{homeUiState.progressBarVisibility}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnRetry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retry"
+            android:visibility="@{homeUiState.errorVisibility}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{homeUiState.getErrorMessage(context)}"
+            android:textColor="@color/card_text_color"
+            android:visibility="@{homeUiState.errorVisibility}"
+            app:layout_constraintEnd_toEndOf="@+id/btnRetry"
+            app:layout_constraintStart_toStartOf="@+id/btnRetry"
+            app:layout_constraintTop_toBottomOf="@+id/btnRetry"
+            tools:text="Internet Connection Failed" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+
+
+

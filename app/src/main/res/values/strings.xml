@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">nearshoretest</string>
+    <string name="title_home">Home</string>
+    <string name="title_about">About</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="copyright_text">© Marvel 2023 - All rights reserved</string>
+    <string name="title_loading">Loading</string>
+    <string name="retry">Retry</string>
+    <string name="something_went_wrong">Something went wrong!</string>
+</resources>
