@@ -13,7 +13,9 @@
 
         <action
             android:id="@+id/action_LoadingScreen_to_Home"
-            app:destination="@id/navigation_home" />
+            app:destination="@id/navigation_home"
+            app:popUpTo="@+id/navigation_loading"
+            app:popUpToInclusive="true"/>
 
     </fragment>
     <fragment

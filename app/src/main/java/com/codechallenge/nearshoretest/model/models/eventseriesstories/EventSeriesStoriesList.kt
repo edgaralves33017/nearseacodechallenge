@@ -5,9 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class EventsList(
-    @SerializedName("available")
-    val available : Int,
-    @SerializedName("items")
-    val items : List<EventSeriesStories>
+data class EventSeriesStoriesList(
+    @SerializedName("results")
+    val results : List<EventSeriesStories>
 ): Parcelable

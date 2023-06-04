@@ -1,6 +1,7 @@
 package com.codechallenge.nearshoretest.model.models.comics
 
 import android.os.Parcelable
+import com.codechallenge.nearshoretest.model.models.characters.MarvelChar
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
@@ -18,8 +19,14 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ComicsList(
-    @SerializedName("available")
-    val available : Int,
-    @SerializedName("items")
-    val items : List<Comic>
+    @SerializedName("offset")
+    val offset : Int,
+    @SerializedName("limit")
+    val limit : Int,
+    @SerializedName("total")
+    val total : Int,
+    @SerializedName("count")
+    val count : Int,
+    @SerializedName("results")
+    val results : List<Comic>,
 ): Parcelable

@@ -4,8 +4,12 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.codechallenge.nearshoretest.model.models.characters.MarvelChar
+import com.codechallenge.nearshoretest.model.models.comics.Comic
+import com.codechallenge.nearshoretest.model.models.eventseriesstories.EventSeriesStories
 import com.codechallenge.nearshoretest.model.network.NetworkRepository
 import com.codechallenge.nearshoretest.model.network.paginationsources.CharacterPaginationSource
+import com.codechallenge.nearshoretest.model.network.paginationsources.ComicPaginationSource
+import com.codechallenge.nearshoretest.model.network.paginationsources.EventSeriesStoriesPaginationSource
 import kotlinx.coroutines.flow.Flow
 
 
@@ -39,9 +43,30 @@ class Repository(
         get() = networkService.apiService
 
     val PAGE_LIMIT = 10
+    val PAGE_LIMIT_SAMPLE = 5
 
     fun getCharacters(name: String?) : Flow<PagingData<MarvelChar>> {
         return Pager(config = PagingConfig(pageSize = PAGE_LIMIT), pagingSourceFactory = { CharacterPaginationSource(apiService, name, PAGE_LIMIT) }).flow
+    }
+
+    fun getComics(id: Int) : Flow<PagingData<Comic>> {
+        return Pager(config = PagingConfig(pageSize = PAGE_LIMIT), pagingSourceFactory = { ComicPaginationSource(apiService, id, PAGE_LIMIT_SAMPLE) }).flow
+    }
+
+    fun getEvents(id: Int) : Flow<PagingData<EventSeriesStories>> {
+        return getEventSeriesOrStories(id, 0)
+    }
+
+    fun getSeries(id: Int) : Flow<PagingData<EventSeriesStories>> {
+        return getEventSeriesOrStories(id, 1)
+    }
+
+    fun getStories(id: Int) : Flow<PagingData<EventSeriesStories>> {
+        return getEventSeriesOrStories(id, 2)
+    }
+
+    private fun getEventSeriesOrStories(id: Int, eventSeriesOrStories:Int) : Flow<PagingData<EventSeriesStories>>{
+        return Pager(config = PagingConfig(pageSize = PAGE_LIMIT), pagingSourceFactory = { EventSeriesStoriesPaginationSource(apiService, id, PAGE_LIMIT_SAMPLE, eventSeriesOrStories) }).flow
     }
 
 /*

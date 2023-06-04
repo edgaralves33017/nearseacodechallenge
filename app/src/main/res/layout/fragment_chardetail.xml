@@ -1,37 +1,354 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/app_bg"
-    android:scrollbars="vertical">
-    
-    <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="comicsUiState"
+            type="com.codechallenge.nearshoretest.ui.chardetail.CharDetailUiState" />
+
+        <variable
+            name="storiesUiState"
+            type="com.codechallenge.nearshoretest.ui.chardetail.CharDetailUiState" />
+
+        <variable
+            name="eventsUiState"
+            type="com.codechallenge.nearshoretest.ui.chardetail.CharDetailUiState" />
+
+        <variable
+            name="seriesUiState"
+            type="com.codechallenge.nearshoretest.ui.chardetail.CharDetailUiState" />
+    </data>
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/app_bg"
+        android:scrollbars="vertical">
 
-
-        <ImageView
-            android:id="@+id/charpic"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:background="@color/app_bg"
-            android:src="@drawable/logo_marvel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/close"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginEnd="@dimen/small_margin"
-            android:src="@drawable/ic_close"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/charpic"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@color/app_bg"
+                android:src="@drawable/logo_marvel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/close"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/small_margin"
+                android:src="@drawable/ic_close"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.core.widget.NestedScrollView>
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/card_label_height"
+                android:background="@drawable/bg_half_card"
+                app:layout_constraintBottom_toBottomOf="@+id/charpic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/charname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/small_margin"
+                    android:paddingEnd="@dimen/small_margin"
+                    android:ellipsize="end"
+                    android:gravity="center|start"
+                    android:singleLine="true"
+                    android:textColor="@color/card_text_color"
+                    android:textSize="@dimen/card_text_size"
+                    android:textStyle="bold"
+                    tools:text="Sample" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/medium_margin"
+                android:paddingBottom="@dimen/medium_margin"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/charpic">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/small_margin"
+                    android:paddingEnd="@dimen/small_margin"
+                    android:ellipsize="end"
+                    android:gravity="center|start"
+                    android:textStyle="bold"
+                    android:textColor="@color/searchbar_hint_color"
+                    android:textSize="@dimen/title1_smaller"
+                    android:text="@string/overview" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/small_margin"
+                    android:paddingEnd="@dimen/small_margin"
+                    android:ellipsize="end"
+                    android:gravity="center|start"
+                    android:textStyle="italic"
+                    android:textColor="@color/searchbar_hint_color"
+                    android:textSize="@dimen/body"
+                    tools:text="Sample" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingStart="@dimen/small_margin"
+                    android:paddingEnd="@dimen/small_margin"
+                    android:ellipsize="end"
+                    android:gravity="center|start"
+                    android:textStyle="bold"
+                    android:textColor="@color/searchbar_hint_color"
+                    android:textSize="@dimen/title1_smaller"
+                    android:text="@string/comics" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/comicsRecList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{comicsUiState.listVisibility}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"  />
+
+                    <ProgressBar
+                        android:id="@+id/comicsprogressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:foregroundTint="@color/card_text_color"
+                        android:visibility="@{comicsUiState.progressBarVisibility}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/comicsbtnRetry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/retry"
+                        android:visibility="@{comicsUiState.errorVisibility}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/comicstvError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{comicsUiState.getErrorMessage(context)}"
+                        android:textColor="@color/card_text_color"
+                        android:visibility="@{comicsUiState.errorVisibility}"
+                        app:layout_constraintEnd_toEndOf="@+id/comicsbtnRetry"
+                        app:layout_constraintStart_toStartOf="@+id/comicsbtnRetry"
+                        app:layout_constraintTop_toBottomOf="@+id/comicsbtnRetry"
+                        tools:text="Internet Connection Failed" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:gravity="center|start"
+                    android:textStyle="bold"
+                    android:textColor="@color/searchbar_hint_color"
+                    android:textSize="@dimen/title1_smaller"
+                    android:text="@string/events" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/eventsRecList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{eventsUiState.listVisibility}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"  />
+
+                    <ProgressBar
+                        android:id="@+id/eventsprogressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:foregroundTint="@color/card_text_color"
+                        android:visibility="@{eventsUiState.progressBarVisibility}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/eventsbtnRetry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/retry"
+                        android:visibility="@{eventsUiState.errorVisibility}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/eventstvError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{eventsUiState.getErrorMessage(context)}"
+                        android:textColor="@color/card_text_color"
+                        android:visibility="@{eventsUiState.errorVisibility}"
+                        app:layout_constraintEnd_toEndOf="@+id/eventsbtnRetry"
+                        app:layout_constraintStart_toStartOf="@+id/eventsbtnRetry"
+                        app:layout_constraintTop_toBottomOf="@+id/eventsbtnRetry"
+                        tools:text="Internet Connection Failed" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:gravity="center|start"
+                    android:textStyle="bold"
+                    android:textColor="@color/searchbar_hint_color"
+                    android:textSize="@dimen/title1_smaller"
+                    android:text="@string/stories" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/storiesRecList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{storiesUiState.listVisibility}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"  />
+
+                    <ProgressBar
+                        android:id="@+id/storiesprogressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:foregroundTint="@color/card_text_color"
+                        android:visibility="@{storiesUiState.progressBarVisibility}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/storiesbtnRetry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/retry"
+                        android:visibility="@{storiesUiState.errorVisibility}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/storiestvError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{storiesUiState.getErrorMessage(context)}"
+                        android:textColor="@color/card_text_color"
+                        android:visibility="@{storiesUiState.errorVisibility}"
+                        app:layout_constraintEnd_toEndOf="@+id/storiesbtnRetry"
+                        app:layout_constraintStart_toStartOf="@+id/storiesbtnRetry"
+                        app:layout_constraintTop_toBottomOf="@+id/storiesbtnRetry"
+                        tools:text="Internet Connection Failed" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:gravity="center|start"
+                    android:textStyle="bold"
+                    android:textColor="@color/searchbar_hint_color"
+                    android:textSize="@dimen/title1_smaller"
+                    android:text="@string/series" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/seriesRecList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{seriesUiState.listVisibility}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"  />
+
+                    <ProgressBar
+                        android:id="@+id/seriesprogressBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:foregroundTint="@color/card_text_color"
+                        android:visibility="@{seriesUiState.progressBarVisibility}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/seriesbtnRetry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/retry"
+                        android:visibility="@{seriesUiState.errorVisibility}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/seriestvError"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{seriesUiState.getErrorMessage(context)}"
+                        android:textColor="@color/card_text_color"
+                        android:visibility="@{seriesUiState.errorVisibility}"
+                        app:layout_constraintEnd_toEndOf="@+id/seriesbtnRetry"
+                        app:layout_constraintStart_toStartOf="@+id/seriesbtnRetry"
+                        app:layout_constraintTop_toBottomOf="@+id/seriesbtnRetry"
+                        tools:text="Internet Connection Failed" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

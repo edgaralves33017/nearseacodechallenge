@@ -16,4 +16,9 @@
     <string name="avengers">Avengers,</string>
     <string name="assemble">Assemble!</string>
     <string name="title_chardetail">Character Detail</string>
+    <string name="comics">Comics</string>
+    <string name="events">Events</string>
+    <string name="stories">Stories</string>
+    <string name="series">Series</string>
+    <string name="na">N/A</string>
 </resources>

@@ -24,7 +24,6 @@ import com.codechallenge.nearshoretest.databinding.FragmentHomeBinding
 import com.codechallenge.nearshoretest.executeWithAction
 import com.codechallenge.nearshoretest.model.models.characters.MarvelChar
 import com.codechallenge.nearshoretest.ui.home.adapter.HomeFragmentAdapter
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -43,10 +42,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         (activity as MainActivity).changeBottomNavigationVisibility(true)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         setAdapter()
         setListener()
         setOnQuerySearchListener()
@@ -84,7 +81,6 @@ class HomeFragment : Fragment() {
 
     private fun searchCharacters(name: String?) {
         homeAdapter.submitData(lifecycle, PagingData.empty())
-
         collectLast(homeViewModel.getCharacters(name), ::setCharacters)
     }
 
