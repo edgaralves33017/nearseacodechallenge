@@ -11,9 +11,15 @@ import kotlinx.coroutines.flow.Flow
 class HomeViewModel : ViewModel() {
     private val repository: Repository = Repository.getInstance()
 
-    /**
-     * Starts download of the CSV file.
-     */
+    private var charactersItemsPagingData: PagingData<MarvelChar>? = null
+    fun getParsedData(): PagingData<MarvelChar>? {
+        return charactersItemsPagingData
+    }
+
+    fun setParsedData(charactersItemsPagingData: PagingData<MarvelChar>) {
+        this.charactersItemsPagingData = charactersItemsPagingData
+    }
+
     fun getCharacters(name: String?) : Flow<PagingData<MarvelChar>> {
         return repository.getCharacters(name).cachedIn(viewModelScope)
     }

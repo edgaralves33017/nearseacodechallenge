@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
@@ -23,8 +24,10 @@ import com.codechallenge.nearshoretest.databinding.FragmentHomeBinding
 import com.codechallenge.nearshoretest.executeWithAction
 import com.codechallenge.nearshoretest.model.models.characters.MarvelChar
 import com.codechallenge.nearshoretest.ui.home.adapter.HomeFragmentAdapter
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -52,7 +55,15 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        searchCharacters(null)
+        val parsedData = homeViewModel.getParsedData()
+        if (parsedData != null) {
+            lifecycleScope.launch {
+                setCharacters(parsedData)
+            }
+        }
+        else {
+            searchCharacters(null)
+        }
     }
 
     private fun setOnQuerySearchListener() {
@@ -73,6 +84,7 @@ class HomeFragment : Fragment() {
 
     private fun searchCharacters(name: String?) {
         homeAdapter.submitData(lifecycle, PagingData.empty())
+
         collectLast(homeViewModel.getCharacters(name), ::setCharacters)
     }
 
@@ -81,7 +93,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setAdapter() {
-        homeAdapter = HomeFragmentAdapter(cardClickListener)
+        homeAdapter = HomeFragmentAdapter(::cardClickListener)
         collect(flow = homeAdapter.loadStateFlow
             .distinctUntilChangedBy { it.source.refresh }
             .map { it.refresh },
@@ -98,6 +110,7 @@ class HomeFragment : Fragment() {
     }
 
     private suspend fun setCharacters(charactersItemsPagingData: PagingData<MarvelChar>) {
+        homeViewModel.setParsedData(charactersItemsPagingData)
         homeAdapter.submitData(charactersItemsPagingData)
     }
 
@@ -108,11 +121,11 @@ class HomeFragment : Fragment() {
 
     private fun cardClickListener(imgView: ImageView, charData: MarvelChar) {
         val extras = FragmentNavigatorExtras(
-            imgView to "imageView"
+            imgView to charData.thumbnail.path
         )
         val bundle = bundleOf(
             "charData" to charData
         )
-        findNavController().navigate(R.id.detailAction, bundle, null, extras)
+        findNavController().navigate(R.id.action_Home_to_CharDetail, bundle, null, extras)
     }
 }

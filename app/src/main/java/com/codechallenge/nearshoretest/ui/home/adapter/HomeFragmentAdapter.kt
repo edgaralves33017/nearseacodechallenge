@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.navigation.fragment.NavHostFragment
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.codechallenge.nearshoretest.R
 import com.codechallenge.nearshoretest.model.models.characters.MarvelChar
+import com.squareup.picasso.Picasso
 
 /**
  * Class adapter for the recycler view
@@ -33,13 +31,11 @@ class HomeFragmentAdapter(val clickListener: (imgView: ImageView, charData: Marv
 
         getItem(position)?.let {
             val url = "${it.thumbnail.path}.${it.thumbnail.extension}"
-            Glide
-                .with(context)
-                .load(url)
-                .placeholder(R.drawable.logo_marvel)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerCrop()
-                .into(holder.charpic)
+            holder.charpic.apply {
+                transitionName = it.thumbnail.path
+                Picasso.get().load(url).placeholder(R.drawable.logo_marvel).fit().centerCrop().into(this)
+            }
+
 
             holder.charname.text = it.name
 
