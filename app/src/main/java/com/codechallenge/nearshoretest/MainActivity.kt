@@ -2,13 +2,11 @@ package com.codechallenge.nearshoretest
 
 import android.os.Bundle
 import android.view.View
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.codechallenge.nearshoretest.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,11 +27,5 @@ class MainActivity : AppCompatActivity() {
 
     fun changeBottomNavigationVisibility(show: Boolean) {
         navView.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
-    private fun hideActionBar() {
-        if (supportActionBar != null) {
-            supportActionBar!!.hide();
-        }
     }
 }

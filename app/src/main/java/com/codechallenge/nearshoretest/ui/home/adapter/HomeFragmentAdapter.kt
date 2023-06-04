@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.navigation.fragment.NavHostFragment
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +19,7 @@ import com.codechallenge.nearshoretest.model.models.characters.MarvelChar
 /**
  * Class adapter for the recycler view
  */
-class HomeFragmentAdapter :
+class HomeFragmentAdapter(val clickListener: (imgView: ImageView, charData: MarvelChar)-> Unit) :
     PagingDataAdapter<MarvelChar, HomeFragmentAdapter.ViewHolder>(Comparator) {
     private lateinit var context: Context
 
@@ -40,6 +42,10 @@ class HomeFragmentAdapter :
                 .into(holder.charpic)
 
             holder.charname.text = it.name
+
+            holder.cardContainer.setOnClickListener { _->
+                clickListener.invoke(holder.charpic, it)
+            }
         }
     }
 
@@ -61,10 +67,12 @@ class HomeFragmentAdapter :
 
         var charpic: ImageView
         var charname: TextView
+        var cardContainer : CardView
 
         init {
             charpic = itemView.findViewById(R.id.charpic)
             charname = itemView.findViewById(R.id.charname)
+            cardContainer = itemView.findViewById(R.id.cardContainer)
         }
     }
 }

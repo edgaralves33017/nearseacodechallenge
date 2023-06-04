@@ -11,13 +11,77 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment"
-        android:background="@color/app_bg">
+        android:background="@color/app_bg"
+        android:paddingTop="@dimen/large_margin"
+        android:paddingStart="@dimen/side_margin"
+        android:paddingEnd="@dimen/side_margin">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/avengers"
+            android:textColor="@color/card_text_color"
+            android:textSize="@dimen/title1_smaller"
+            android:textStyle="bold"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/home_marvel_logo_width"
+            android:layout_height="@dimen/home_marvel_logo_height"
+            app:layout_constraintBottom_toBottomOf="@+id/textView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView2"
+            app:cardCornerRadius="@dimen/home_marvel_logo_corner_radius">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo_marvel"
+                />
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/assemble"
+            android:textColor="@color/card_text_color"
+            android:textSize="@dimen/title1"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <com.codechallenge.nearshoretest.common.EmptySubmitSearchView
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:background="@drawable/bg_stroke"
+            android:iconifiedByDefault="false"
+            android:queryHint="@string/search"
+            app:closeIcon="@android:drawable/ic_menu_close_clear_cancel"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:queryHint="@string/search"
+            app:searchIcon="@android:drawable/ic_menu_search" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/charRecView"
-            android:visibility="@{homeUiState.listVisibility}"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/bottom_margin"
+            android:visibility="@{homeUiState.listVisibility}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
         <ProgressBar
             android:id="@+id/progressBar"

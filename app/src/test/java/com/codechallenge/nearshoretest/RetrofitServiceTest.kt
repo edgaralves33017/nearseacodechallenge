@@ -38,7 +38,7 @@ class RetrofitServiceTest {
             val mockResponse = MockResponse()
             val body = loadFileText(this, "/marvel_char_list.json")
             mockWebServer.enqueue(mockResponse.setBody(body))
-            val response = apiService.getCharacters(BuildConfig.MARVEL_API_KEY, 10, 0, "")
+            val response = apiService.getCharacters(BuildConfig.MARVEL_API_PUBLIC_KEY, "", 0, 0, 0, null)
             val request = mockWebServer.takeRequest()
             assertEquals(false, response.body()?.data?.results?.isEmpty())
         }

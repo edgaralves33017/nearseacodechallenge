@@ -12,5 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:editTextColor">@color/loading_copyright_text_color</item>
+        <item name="android:textColorHint">@color/searchbar_hint_color</item>
     </style>
 </resources>
