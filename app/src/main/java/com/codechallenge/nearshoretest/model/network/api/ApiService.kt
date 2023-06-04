@@ -17,6 +17,6 @@ interface ApiService {
         @Query("ts") ts: Long,
         @Query("limit") limit: Int,
         @Query("offset") offset: Int,
-        @Query("name") nameSearch: String?,
+        @Query("nameStartsWith") nameSearch: String?,
     ): Response<MarvelCharListResp>
 }
